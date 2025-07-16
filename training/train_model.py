@@ -1,10 +1,3 @@
-# train_model.py
-import torch
-import torch.nn as nn
-import torch.optim as optim
-# from torchinfo import summary
-# from cnn_model import CNNModel
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -80,53 +73,3 @@ def train_model(model, epochs, learning_rate, train_generator, val_loader, devic
         
     history = {"train_loss": train_losses, "val_loss": val_losses}
     return model,history
-
-
-# def train_model(output_layer, train_loader, val_loader, epochs=None, lr=None):
-#     # Set default values if not provided
-#     if epochs is None:
-#         epochs = 10
-#     if lr is None:
-#         lr = 0.001
-#     # Instantiate the model
-#     model = CNNModel(output_layer)
-    
-#     print(summary(model, input_size=(train_loader.batch_size, 1, 240)))
-#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#     model.to(device)
-    
-#     # Define loss function and optimizer
-#     criterion = nn.MSELoss()
-#     optimizer = optim.Adam(model.parameters(), lr=lr)
-    
-#     for epoch in range(epochs):
-#         # Training loop
-#         model.train()
-#         train_loss = 0.0
-
-#         for inputs, targets in train_loader:
-#             inputs, targets = inputs.to(device), targets.to(device)
-
-#             optimizer.zero_grad()
-#             outputs = model(inputs)
-
-#             loss = criterion(outputs, targets)
-#             loss.backward()
-#             optimizer.step()
-#             train_loss += loss.item()
-        
-#         # Validation loop
-#         model.eval()
-#         val_loss = 0.0
-#         with torch.no_grad():
-#             for inputs, targets in val_loader:
-#                 inputs, targets = inputs.to(device), targets.to(device)
-#                 outputs = model(inputs)
-#                 loss = criterion(outputs, targets)
-#                 val_loss += loss.item()
-
-#         train_loss /= len(train_loader)
-#         val_loss /= len(val_loader)
-#         print(f"Epoch {epoch+1}/{epochs}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
-
-#     return model
